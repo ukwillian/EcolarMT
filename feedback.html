@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWatt MT - Feedback</title>
+    <!-- Ícone na aba do navegador -->
+    <link rel="icon" type="image/png" href="icon.png">
+    <!-- Fonte moderna idêntica à página principal -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-hover: #1b5e20;
+            --secondary-color: #4caf50;
+            --text-main: #2c3e50;
+            --text-muted: #607d8b;
+            --card-bg: #ffffff;
+            --border-radius: 12px;
+            --shadow: 0 10px 30px rgba(46, 125, 50, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Mesma imagem de fundo configurada para a raiz */
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+            background-color: rgba(255, 255, 255, 0.85); /* Escudo branco para leitura no topo */
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* Container centralizado idêntico e protegido com fundo branco */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            box-sizing: border-box;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, textarea, select {
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background-color: #fcfdfc;
+            color: var(--text-main);
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.15);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1rem;
+            display: block;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-voltar {
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .btn-voltar:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EcoWatt MT</h1>
+        <p>Sua opinião é muito importante para nós!</p>
+    </header>
+
+    <div class="container">
+        <!-- Formulário de Envio de Feedback conforme especificação -->
+        <form id="form-feedback" onsubmit="enviarFeedback(event)">
+            <div class="input-group">
+                <label for="nome">Seu Nome</label>
+                <input type="text" id="nome" placeholder="Digite seu nome" required>
+            </div>
+
+            <div class="input-group">
+                <label for="avaliacao">Como você avalia o sistema?</label>
+                <select id="avaliacao" required>
+                    <option value="" disabled selected>Escolha uma nota</option>
+                    <option value="5">⭐⭐⭐⭐⭐ - Excelente</option>
+                    <option value="4">⭐⭐⭐⭐ - Muito Bom</option>
+                    <option value="3">⭐⭐⭐ - Bom</option>
+                    <option value="2">⭐⭐ - Regular</option>
+                    <option value="1">⭐ - Precisa melhorar</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="mensagem">Deixe seu comentário, dúvida ou sugestão:</label>
+                <textarea id="mensagem" rows="5" placeholder="Escreva aqui seu comentário..." required></textarea>
+            </div>
+
+            <button type="submit">Enviar Feedback</button>
+        </form>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-voltar">← Voltar para o Início</a>
+        </div>
+    </div>
+
+    <script>
+        function enviarFeedback(event) {
+            event.preventDefault();
+            
+            // Simulação de envio para o usuário
+            alert("Muito obrigado pelo seu feedback! Ele nos ajuda a melhorar o EcoWatt MT.");
+            
+            document.getElementById('form-feedback').reset();
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
